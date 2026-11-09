@@ -18,7 +18,6 @@ deleteDB.addEventListener("click", function(event) {
 
 document.addEventListener("paste", function(event) {
     const clipboardData = event.clipboardData || window.clipboardData;
-
     const textData = clipboardData.getData('text');
     const imageItem = Array.from(clipboardData.items).find(item => item.type.startsWith('image/'));
 
