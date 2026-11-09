@@ -10,48 +10,59 @@
     --text: rgb(15,15,15);
 }
 
-html {
+html, body {
+    height: 100vh;
+    overflow: hidden;
     background-color: var(--bg);
+    display: flex;
+    flex-direction: column;
 }
 
 .board-grid {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
-    justify-items: flex-start;
+    flex: 1 1 0;
+    min-height: 0;
+    align-items: stretch;
+    padding: 10px;
+    gap: 10px;
     color: var(--sec);
 }
 
 .board-item {
-    flex: 1 1 400px;
-    height: 400px;
+    flex: 1 1 40%;
+    min-height: 0;
+    min-height: 0;
     background: #1e1e1e;
     border-radius: 8px;
     overflow: hidden;   
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
 }
 
 .card-img {
     height: 100%;
     width: 100%;
+    object-fit: cover;
 }
 
 .board-item.iframe {
-    flex-grow: 3;
-    height: 400px;
+    flex: 1 1 40%;
+    min-height: 0;
 }
 
 .card-iframe {
     width: 100%;
     height: 100%;
+    border: none;
 }
 
 .card-color {
-    width: 50vh;
-    height: 20vw;
-    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--sec);
 }
 
@@ -60,15 +71,12 @@ html {
 footer {
     z-index: 100;
     display: flex;
-    position: fixed;
     width: 100%;
     padding: 1rem;
-    bottom: 0;
-    left: 0;
     font-size: 2rem;
     justify-content: space-between;
-    
     background-color: var(--sec);
     color: var(--text);
+    flex-shrink: 0;
 
 }
