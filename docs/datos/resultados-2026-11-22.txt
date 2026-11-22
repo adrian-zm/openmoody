@@ -1,0 +1,31 @@
+Building in release mode (slow the first time)...
+OK: php -S returns the 50 messages
+OK: Rust + SQLite returns the 50 messages
+OK: Rust + Postgres returns the 50 messages
+OK: nginx + php-fpm returns the 50 messages
+OK: OPcache is on in php-fpm
+
+2000 requests, 50 at a time. Each cell: requests per second (p99 in ms)
+Rows with -k: wrk for 5 s over HTTP/1.1, like a browser; p99 shows its unit
+                               php -S      nginx + php-fpm        Rust + SQLite      Rust + Postgres
+GET 50 rows                 11321 (6)            17111 (3)            25010 (3)            14882 (5)
+GET 50 rows -k               no reuse       28469 (3.62ms)       31982 (1.83ms)       22179 (2.65ms)
+GET 0 rows                  11785 (5)            17692 (3)            25391 (4)            16430 (3)
+GET 0 rows -k                no reuse       28199 (3.71ms)       66158 (0.97ms)       24810 (2.64ms)
+POST                       1656 (133)           2171 (197)           2572 (122)           14754 (14)
+
+OK: php -S stored the 2000 POSTs
+OK: nginx + php-fpm stored the 2000 POSTs
+OK: Rust + SQLite stored the 2000 POSTs
+OK: Rust + Postgres stored the 2000 POSTs
+Memory (RSS): php -S 58.4 MB
+              nginx + php-fpm 184.5 MB
+              Rust + SQLite 12.2 MB (the database runs inside the process)
+              Rust + Postgres 9.1 MB for the binary, plus 207.0 MB for Postgres
+              (the Postgres figure adds up the RSS of its processes, so it counts shared memory several times)
+Footprint, counting shared memory once:
+  rust-sqlite: Footprint: 9392 KB
+  rust-postgres-binary: Footprint: 7024 KB
+  postgres: Footprint: 83 MB
+  php-fpm-nginx: Footprint: 105 MB
+Rust binary: 5.2M

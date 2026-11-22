@@ -22,7 +22,7 @@ chat-rs/
   data/chat.db      la base de datos (no va a git)
 ```
 
-Solo se sirve `static/`. Si se sirviera la carpeta entera, cualquiera podría descargarse `data/chat.db` o `Cargo.toml`. Con `php -S` pasa justo eso: sirve todo lo que hay en la carpeta.
+Solo se sirve `static/`, así que `/Cargo.toml`, `/src/main.rs` o `/data/chat.db` dan 404. Con el montaje típico de PHP es al revés: tanto `php -S` como el Apache de XAMPP sirven todo lo que hay en la carpeta del proyecto. Al probarlo con XAMPP se podía recorrer el directorio entero y descargar cualquier fichero, `chat.sql` incluido; en la versión con SQLite, eso sería la base de datos con todos los mensajes. En PHP se evita igual que aquí: dejando en la carpeta pública solo lo que se quiere servir, como hace Laravel con `public/`. La diferencia la pone el servidor y no el lenguaje: Apache sirve la carpeta entera salvo que se le limite, y axum no sirve nada que no se le añada. Un `ServeDir::new(".")` en Rust expondría lo mismo que XAMPP.
 
 ## Cargo.toml
 
