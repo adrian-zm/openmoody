@@ -1,6 +1,8 @@
 use tokio::net::TcpListener;
 use tower_http::services::{ServeDir, ServeFile};
 
+mod detect;
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // let pool = SqlitePool::connect("sqlite:data/chat.db").await?;
