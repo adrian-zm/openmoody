@@ -1,6 +1,7 @@
 data/
 .DS_Store
 my-redis/
+*.go
 
 # Added by cargo
 
